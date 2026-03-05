@@ -1,0 +1,52 @@
+{
+  "name": "@sdjz/ai-sdk",
+  "version": "0.1.0",
+  "description": "Lightweight AI SDK with agent loop, tools, middleware, and provider orchestration.",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./types": {
+      "types": "./types.d.ts",
+      "import": "./types.js"
+    },
+    "./testing": {
+      "types": "./testing.d.ts",
+      "import": "./testing.js"
+    }
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "types.js",
+    "types.d.ts",
+    "testing.js",
+    "testing.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "ai",
+    "sdk",
+    "agent",
+    "tool-calling",
+    "llm"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuakami/ai-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shuakami/ai-sdk/issues"
+  },
+  "homepage": "https://github.com/shuakami/ai-sdk#readme"
+}
