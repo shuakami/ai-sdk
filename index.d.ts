@@ -49,6 +49,7 @@ export interface ChatRequest {
   /** Whether to execute multiple tool calls in parallel. Default: false */
   parallel?: boolean
   model?: string
+  [key: string]: any
 }
 
 export interface Message {
@@ -67,6 +68,8 @@ export interface ChatResponse {
   text: string
   usage?: Usage
   toolCalls?: ToolCall[] | null
+  reasoningContent?: string
+  reasoning_content?: string
   [key: string]: any
 }
 

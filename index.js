@@ -620,7 +620,15 @@ export function createAI(options) {
             }
 
             // Add tool results to messages and continue
-            messages.push({ role: 'assistant', content: '', toolCalls: lastResult.toolCalls })
+            messages.push({
+              role: 'assistant',
+              content: '',
+              toolCalls: lastResult.toolCalls,
+              ...(lastResult.reasoningContent ? {
+                reasoningContent: lastResult.reasoningContent,
+                reasoning_content: lastResult.reasoningContent,
+              } : {}),
+            })
             for (const tr of toolResults) {
               messages.push({ role: 'tool', name: tr.name, callId: tr.callId, content: JSON.stringify(tr.result) })
             }
@@ -908,7 +916,15 @@ export function createAI(options) {
           trace.push({ step: stepCount, type: result.toolCalls ? 'tool_call' : 'text', result })
 
           if (result.toolCalls && result.toolCalls.length > 0) {
-            messages.push({ role: 'assistant', content: result.text || '', toolCalls: result.toolCalls })
+            messages.push({
+              role: 'assistant',
+              content: result.text || '',
+              toolCalls: result.toolCalls,
+              ...(result.reasoningContent ? {
+                reasoningContent: result.reasoningContent,
+                reasoning_content: result.reasoningContent,
+              } : {}),
+            })
 
             const preparedCalls = []
             for (const tc of result.toolCalls) {
@@ -1005,7 +1021,14 @@ export function createAI(options) {
             usage: result.usage || null,
           }
           steps.push(textStep)
-          messages.push({ role: 'assistant', content: lastText })
+          messages.push({
+            role: 'assistant',
+            content: lastText,
+            ...(result.reasoningContent ? {
+              reasoningContent: result.reasoningContent,
+              reasoning_content: result.reasoningContent,
+            } : {}),
+          })
 
           if (stopWhen({ usage: totalUsage, steps })) break
           break
@@ -1041,7 +1064,15 @@ export function createAI(options) {
           }
 
           if (result.toolCalls && result.toolCalls.length > 0) {
-            messages.push({ role: 'assistant', content: result.text || '', toolCalls: result.toolCalls })
+            messages.push({
+              role: 'assistant',
+              content: result.text || '',
+              toolCalls: result.toolCalls,
+              ...(result.reasoningContent ? {
+                reasoningContent: result.reasoningContent,
+                reasoning_content: result.reasoningContent,
+              } : {}),
+            })
 
             const preparedCalls = []
             for (const tc of result.toolCalls) {
@@ -1118,7 +1149,14 @@ export function createAI(options) {
           }
 
           lastText = result.text || ''
-          messages.push({ role: 'assistant', content: lastText })
+          messages.push({
+            role: 'assistant',
+            content: lastText,
+            ...(result.reasoningContent ? {
+              reasoningContent: result.reasoningContent,
+              reasoning_content: result.reasoningContent,
+            } : {}),
+          })
 
           for (const char of lastText) {
             yield { type: 'text-delta', delta: char }
